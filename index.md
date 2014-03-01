@@ -1,3 +1,6 @@
+---
+---
+
 
 Na tej strani najdete predstavitve vsebin mentorjev [CoderDojoSi](http://www.coderdojo.si).
 Kratke, ~15-minutne predstavitve spremljajo naš [stalni program](http://course.coderdojo.si).
