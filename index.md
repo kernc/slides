@@ -8,11 +8,9 @@ Kratke, ~15-minutne predstavitve spremljajo naš
 Za vprašanja, predloge, pripombe, popravke smo vam na voljo na na
 info(afna)coderdojo(pika)si ali ekipa(afna)coderdojo(pika)si.
 
-Na tej strani najdete predstavitve vsebin mentorjev [CoderDojoSi](http://www.coderdojo.si).
-Kratke, ~15-minutne predstavitve spremljajo naš [stalni program](http://course.coderdojo.si).
-Za vprašanja smo vam na voljo na na info(afna)coderdojo(pika)si ali ekipa(afna)coderdojo(pika)si.
-
-* FHS — Filesystem Hierarchy Standard
+* [Osnove programskih jezikov in programiranja](p/osnove-programskih-jezikov-in-programiranja.html)
+* Osnove programiranja: razredi
+* FHS — hierarhija datotečnega sistema
 * Regularni izrazi
 * ...
 

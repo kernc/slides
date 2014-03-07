@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="utf-8" />
+<meta content="Osnovna delitev programskih jezikov, prvine, uvod v ključne besede, stavke, zanke, funkcije, razrede, ..." name="description" />
+<title>Osnove programskih jezikov in programiranja</title>
+<link href="../remark-style.css" rel="stylesheet" type="text/css">
+<style>
+.bullet {font-size:150%; font-weight:bold; color:maroon;}
+.bullet:after {content:'. ';}
+</style>
+</head>
+<body>
+<noscript>Če <b>omogočite JavaScript</b>, ta stran postane poučna prezentacija.</noscript>
+<textarea id="source">
+class: center, middle
+# Osnove programskih jezikov in programiranja
+---
+## Programske jezike lahko delimo na...
+
+V programskih jezikih pišemo **_izvorno kodo_** programov, ki jih nato...
+.col2[
+  .bullet[A]
+  **_prevajalnik_** (angl. _compiler_) **prevede** v strojno kodo
+  (zaporedje ničel in enk), ki jo razume procesor (angl. _CPU_).
+
+  Izvorna koda programov mora biti **ločeno prevedena** za vsako
+  arhitekturo (x86, arm, ...) in za vsak operacijski sistem posebej.
+
+  Primeri jezikov: C, C++, Java, Go, Haskell, ...
+]
+
+???
+  Prevajamo **posebej** za: Windows, Linux, 32/64-bit OS, ARM (**mobilne naprave**), ...
+--
+.col2[
+.bullet[B]
+  **_interpreter_** vrstico-po-vrstico **izvaja** v t.i.
+  [_read-evaluate-print_ zanki](https://en.wikipedia.org/wiki/Read-eval-print_loop).
+
+  Interpretirani ali **skriptni jeziki** so običajno prevedeni v neko enotno
+  **vmesno kodo**, ki jo lahko izvajamo na vseh arhitekturah/OS, kjer
+  teče njihov interpreter (navidezni stroj).
+
+  Primeri: Python, JavaScript, Bash, Java, ...
+]
+
+???
+  Zato **downloadamo interpreter** za Python, JRE - Java Runtime Environment,
+  spletni brskalniki vsebujejo vsak svoj JavaScript interpreter...
+
+  **Primeri**: Bash razume terminal, preden poženete `ipython`.
+
+  **Q:** Kateri jeziki so vam ljubši?
+
+  Prevedeni jeziki so hitrejši v fazi izvajanja.
+  Skriptni jeziki so hitrejši v fazi razvoja.
+
+---
+## Programske jezike delimo tudi drugače...
+
+.col2[**_imperativni_** (postopkovni), kjer točno navedemo **kako** naj program doseže nek cilj,]
+.col2[**_deklarativni_**, kjer samo specificiramo rešitev (**kaj**), interpreter pa sam poišče ustrezno pot,]
+???
+  Python, JavaScript in **večina skriptnih jezikov** spada med imperativne,
+  ne-funkcijske, dinamično-tipizirane jezike.
+--
+.col2[**_funkcijski_**, kjer je **vsak** ukaz funkcija, ki nekaj vrača,]
+.col2[**_ne-funkcijski_**, za katere to ne velja,]
+--
+.col2[**_statično-tipizirani_**, kjer morajo biti tipi struktur vnaprej natančno določeni,]
+.col2[**_dinamično-tipizirani_**, kjer se tipi struktur prilagajajo programerju,]
+
+šibko/močno-tipizirani, objektno/dogodkovno/podatkovno/...-usmerjeni, logični, makro jeziki ...
+
+### .center[ampak več o tem drugič!]
+
+---
+## Kam spada HTML, CSS?
+--
+
+HTML (za definicijo spletnih vsebin) in CSS (za oblikovanje le-teh) nista programska jezika.
+
+.center[Hyper-Text .u[Mark-up Language]]
+
+To so torej **označevalni jeziki** (deklarativni po definiciji).
+
+.col3[HTML
+```xml
+<h2 class="title">Seznam</h2>
+<ul>
+  <li><b>seks</b></li>
+  <li><del>droge</del></li>
+  <li><i>rokenrol</i></li>
+</ul>
+```
+]
+.col3[CSS
+```css
+h2.title {
+  font-weight: bold;
+}
+ul li {
+  color: red;
+  margin-bottom: 10px;
+}
+ul li:last-child {
+  margin-bottom: 0;
+}
+
+```
+]
+.col3[Markdown
+```
+## Seznam
+- **seks**
+- ~~droge~~
+- _rokenrol_
+
+```
+]
+.clear[Tako kot programskih je tudi mark-up jezikov veliko!]
+
+???
+  Če odpreš neko *.ini datoteko z nastavitvami, konfiguracijo.
+  A je tisto programski jezik?
+
+  Spomnimo se HTML **značk** (angl. _tags_).
+
+  Markdown se prevede v HTML. Znatno manj pisanja!
+
+---
+class: center, middle
+# Prvine programskih jezikov
+---
+## ~~Prvine~~ Sestavine programskih jezikov
+* **ključne besede** — rezervirane besede, ki so del jezika,
+  * [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Reserved_Words):
+    `if`, `for`, `while`, `break`, `return`, `try`, `new`, `delete`, `function`, `continue` ...
+  * [Python](http://zetcode.com/lang/python/keywords/):
+    `if`, `for`, `while`, `break`, `return`, `try`, `del`, `def` `import`, `and`, `or` ...
+--
+
+* **spremenljivke** — mali "prostorčki," ki jim določimo neko **ime** in kamor shranimo neko **vrednost**,
+--
+
+* **tipi** — tipi spremenljivk, vrste, kategorije,
+  * Python: `int`, `str`, `float`, `bool`, `list`, `dict`, `object`, ...
+  * JavaScript: `Number`, `String`, `Boolean`, `Array`, `Object`, `null`
+
+???
+  Stringu bomo rekli string — niz znakov, string!
+  Do tukaj vse jasno?
+--
+
+* **stavki** (ukazi),
+--
+
+* **operatorji** — znaki, ki nakazujejo operacije
+  * npr. `+` (seštevanje, dodajanje), `-` (odštevanje),
+    `*` (množenje), `/` (deljenje), `[]` (iskanje po indeksu),
+    `and` (logični 'in'), `or` (logični 'ali'), `not` (logična negacija),
+    `&` (binarni 'in')...
+--
+
+* **funkcije** — shranimo blok kode za nadaljnjo, **večkratno uporabo**,
+--
+
+* **razredi** — so tipi, ki jih sami definiramo,
+* **komentarji**.
+
+???
+  Kaj manjka?
+---
+## Stavki
+* **prireditve** — spremenljivkam prirejamo vrednost, navadno z enačajem
+  ```python
+  A = 10               # A je spremenljivka tipa 'int' z vrednostjo 10
+  A = 25               #   sedaj ima A novo vrednost, 25
+  b = 'besedilo'       # b je spremenljivka tipa 'str' z vrednostjo 'besedilo'
+  PI = 3.14            # PI je spremenljivka tipa 'float' z vrednostjo round(PI, 2)
+  seznam = [A, b, PI]  # seznam je seznam (angl. list) treh elementov
+  ```
+--
+
+* **pogojni stavki** (pogojno izvrševanje kode; ključne besede: **if**, ...)
+  ```python
+  if logični_pogoj:  # če je pogoj izpolnjen
+      naredi_nekaj()
+  elif drug_pogoj:   # morda je izpolnjen drug pogoj?
+      naredi_nekaj_drugega()
+  else:              # noben pogoj ni bil izpolnjen, zadnja možnost
+      naredi_nekaj_tretjega()
+  ```
+--
+
+* **zanke** (ponavljanje dokler je izpolnjen pogoj)
+  ```python
+  for element in seznam:
+      print(element)      # izpiše elemente seznama
+
+  while A > 10:
+      print('A je večji od 10. A =', A)
+      A = A - 1           # pomanjšaj A za eno
+  ```
+---
+## Funkcije
+
+Funkcije so poimenovani bloki kode, ki jih lahko večkrat uporabimo s
+preprostim **enovrstičnim** klicem. Definiramo enkrat, uporabimo večkrat.
+**DRY** — _Don't Repeat Yourself_.
+.col2[Python
+```python
+def vrni_najvecji_element(seznam):
+    max_stevilo = -999
+    for stevilo in seznam:
+        if stevilo > max_stevilo:
+            max_stevilo = stevilo
+    return max_stevilo
+```
+]
+.col2[JavaScript
+```javascript
+function vrni_najvecji_element(seznam) {
+  var max_stevilo = -999;
+  for (var i = 0; i < seznam.length; ++i) {
+    if (seznam[i] > max_stevilo) {
+      max_stevilo = seznam[i];
+    }
+  }
+  return max_stevilo;
+}
+```
+]
+.small[*****V Pythonu že obstaja funkcija `max()`, ki dela natanko to (samo bolj pravilno).]
+.small[******JavaScript, kot mnogi drugi jeziki, uporablja
+[tradicionalno `for` zanko](https://en.wikipedia.org/wiki/For_loop#Traditional_for_loops).]
+
+???
+  V JavaScript-u **`var`** kot **_variable_** (spremenljivka).
+
+  **Katera koda** vam je **bolj všeč?**
+--
+Uporabimo večkrat ...
+```python
+>>> seznam = [1, 2, 3, 4, 5]       # definiramo seznam
+>>> vrni_najvecji_element(seznam)  # klic funkcije s seznamom kot prvim in edinim argumentom
+5
+>>> vrni_najvecji_element([0, -1337, 5, 11, 1605])  # klic funkcije z drugim seznamom
+1605
+```
+???
+  '>>>' nakazuje vnos v Python interpreter.
+---
+## Funkcije ...
+
+Vse funkcije imajo:
+
+* glavo (prototip), ki jo sestavlja **ime funkcije**
+  in navedba **argumentov** (vhodnih parametrov), ki jih funkcija sprejme
+  (v prejšnjem primeru argument en — `seznam`),
+* telo, tj. blok kode, ki se izvede ob klicu funkcije,
+* vrednost, ki jo vračajo (kar sledi ključni besedi `return`).
+
+???
+  Pojdi nazaj in **pokaži glavo, telo in return**!
+--
+
+Za .u[_lepe_ funkcije] je značilno, da so:
+
+* **kratke** (telo dolgo največ 15 vrstic, raje 5 vrstic ali manj),
+* smiselno poimenovane,
+* deterministične, tj. da pri klicu z
+  **enakimi vhodnimi argumenti** vračajo vedno **enako izhodno vrednost**.
+
+Zlato pravilo programiranja:
+.quote[Namesto kopiranja kode uporabljajmo .u[**več funkcij**]!]
+
+???
+  Predolge funkcije je običajno dobro razdrobiti na več krajših funkcij.
+---
+## Razredi
+
+Razredi so **tipi**. Samo primer, bolj podrobno prihodnjič.
+```python
+class Oseba(object):  # razrede odlikuje ključna beseda class
+    def __init__(self, ime, starost):  # razredi imajo konstruktor, ki določa lastnosti instance
+        self.ime = ime
+        self.starost = 14
+
+    def izkaznica(self):  # razredi imajo funkcije, ki operirajo nad instancami → metode
+        print('Oseba:', self.ime)
+        print('Starost:', self.starost)
+
+    def postaraj(self, koliko_let=10):
+        self.starost += koliko_let
+```
+V interpreterju...
+```python
+>>> janez = Oseba('Janez', 12)  # janez je spremenljivka z vrednostjo 'objekt tipa Oseba'
+>>> janez.izkaznica()
+Oseba: Janez
+Starost: 12
+>>> janez.postaraj(3)
+>>> janez.starost
+15
+>>> janez.postaraj()
+>>> janez.izkaznica()
+Oseba: Janez
+Starost: 25
+```
+**Objekti** (= posamezne instance **razred**ov) imajo **atribute** (`ime`, `starost`)
+in funkcije, ki jim strokovno rečemo **metode** (`izkaznica`, `postaraj`).
+---
+background-image: url(../resources/fibonacci-shell.png)
+## Komentarji
+
+Najbolj pomembno smo prihranili za konec.
+
+Vsa koda, ki jo napišemo, mora biti komentirana (dokumentirana),
+zato da jo čez štiri mesece lahko hitro spet razumemo.
+
+Python kot komentar preskoči vse za `#` znakom ali znotraj `"""`,
+JavaScript pa vse za `//` ali znotraj `/* ... */`.
+
+Primer slabega komentiranja:
+```javascript
+function fib(n) {  // funkcija fib
+  if (n <= 1)      // če je n manjši ali enak 1
+    return n;      // vrnemo n
+  return fib(n-1) + fib(n-2);  // sicer vrnemo fib(n-1) + fib(n-2)
+}
+```
+Primer dobrega komentiranja:
+```python
+def fib(n):
+    """Izračuna in vrne n-to Fibonaccijevo število
+       (http://sl.wikipedia.org/wiki/Fibonaccijevo_število)
+       izračunano s pomočjo rekurzije: http://sl.wikipedia.org/wiki/Rekurzija
+    """
+    if n <= 1:
+      return n
+    return fib(n-1) + fib(n-2)  # vsota prejšnjih dveh Fibonaccijevih števil
+```
+???
+  Zakaj je primer slabega komentiranja slab?
+
+  Vprašanja?
+</textarea>
+<script src="http://gnab.github.com/remark/downloads/remark-0.6.0.min.js"></script>
+<script src="../remark-script.js"></script>
+</body>
+</html>
