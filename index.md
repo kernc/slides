@@ -9,6 +9,7 @@ Za vprašanja, predloge, pripombe, popravke smo vam na voljo na na
 info(afna)coderdojo(pika)si ali ekipa(afna)coderdojo(pika)si.
 
 * [Osnove programskih jezikov in programiranja](p/osnove-programskih-jezikov-in-programiranja.html)
+* [Rekurzija](p/rekurzija.html)
 * Osnove programiranja: razredi
 * FHS — hierarhija datotečnega sistema
 * Regularni izrazi

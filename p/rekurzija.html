@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="utf-8" />
+<meta content="OPIS PREDSTAVITVE" name="description" />
+<title>NASLOV PREDSTAVITVE</title>
+<link href="../remark-style.css" rel="stylesheet" type="text/css">
+<style>
+</style>
+</head>
+<body>
+<noscript>Če <b>omogočite JavaScript</b>, ta stran postane poučna prezentacija.</noscript>
+<textarea id="source">
+class: center, middle
+# Rekurzija
+Da bi razumeli rekurzijo, morate najprej razumeti rekurzijo.
+---
+## Rekurzija v slikah
+.center[![primer rekurzije](../resources/rekurzija/frame1.png)]
+---
+.col2[.center[![primer rekurzije](../resources/rekurzija/frame2.png)]]
+.col2[.center[![primer rekurzije](../resources/rekurzija/frame3.png)]]
+---
+.center[![primer rekurzije](../resources/rekurzija/desktop1.png)]
+---
+.center[![primer rekurzije](../resources/rekurzija/desktop2.png)]
+---
+## Definicija
+<iframe width="100%" height="300" src="//bos.zrc-sazu.si/cgi/a03.exe?name=sskj_testa&amp;expression=rekurz&amp;hs=1" frameborder="0"></iframe>
+Rekurzija je **postopek**, ki je definiran (določen, **opisan**) **sam s sabo**.
+
+.small[Rešitev celotnega problema vključuje rešitev istega problema nad manjšim obsegom podatkov.]
+---
+# Fraktali
+... so [**samopodobni**](https://en.wikipedia.org/wiki/Self-similarity) in **definirani rekurzivno**
+![Zmajevska krivulja - animacija](https://upload.wikimedia.org/wikipedia/commons/6/67/DragonCurve_animation.gif)
+---
+## Sierpinski trikotnik
+.center[![Sierpinski trikotnik](../resources/rekurzija/sierpinski1.png)]
+---
+## Sierpinski trikotnik ...
+.center[<img alt="konstrukcija trikotnika Sierpinskega" src="../resources/rekurzija/sierpinski2.png" style="width:50%"/>]
+---
+## Cantorjevi krogi
+.center[<img alt="Cantorjevi krogi" src="../resources/rekurzija/cantor.png" style="width:70%"/>]
+---
+## Kochova snežinka
+.center[<img alt="Kochova snežinka" src="../resources/rekurzija/koch-snowflake.png" style="width:80%"/>]
+---
+## Pitagorovo drevo
+.center[<img alt="Konstrukcija Pitagorovega drevesa" src="../resources/rekurzija/pythagoras-tree1.png" style="width:100%"/>]
+
+Oblika drevesa odvisna od začetnih parametrov sistema (kotov trikotnika).
+---
+## Pitagorovo drevo ...
+![Pitagorovo drevo](../resources/rekurzija/pythagoras-tree2.png)
+---
+## Pitagorovo drevo ...
+![Pitagorovo drevo](../resources/rekurzija/pythagoras-tree3.png)
+---
+## Pitagorovo drevo ...
+.center[<iframe width="600" height="400" src="//www.youtube.com/embed/jEmSxcr-rRc?rel=0" frameborder="0" allowfullscreen></iframe>]
+---
+## Pitagorovo drevo ...
+.center[![Pitagorovo drevo](../resources/rekurzija/pythagoras-tree4.png)]
+---
+.center[![3D drevo v igri](https://upload.wikimedia.org/wikipedia/commons/b/b1/Fractal_tree_%28Plate_b_-_3%29.jpg)]
+---
+## Fibonaccijevo zaporedje
+Recimo, da imamo zaporedje števil
+.center[0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, ...]
+kjer je **vsako naslednje** število **vsota prejšnjih dveh**.
+
+--
+
+Python koda:
+
+--
+```python
+def fib(N):
+    return fib(N-1) + fib(N-2)  # ponovimo rekurzivni klic fib()
+```
+--
+Kaj se zgodi?
+
+--
+```python
+>>> def fib(N):
+...     return fib(N-1) + fib(N-2)
+... 
+>>> fib(5)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "<stdin>", line 2, in fib
+  File "<stdin>", line 2, in fib
+  ...                              # par sto ali tisoč vrstic
+  File "<stdin>", line 2, in fib
+  File "<stdin>", line 2, in fib
+RuntimeError: maximum recursion depth exceeded
+```
+---
+.center[![Infinite recursion — You gotta know when to quit](../resources/rekurzija/recursion-quit.png)]
+---
+## Ustavitveni pogoj
+Če želimo enkrat priti do rešitve (končati problem), potem očitno
+ne moremo nadaljevati v nedogled. Potreben je **ustavitveni pogoj**.
+
+Kdaj v postopku ne uporabimo spet istega postopka ampak se ustavimo?
+???
+  Kdaj?
+
+--
+<br><br>
+→ Običajno takrat, **ko je problem dovolj majhen** (enostaven).
+
+.small[V primeru prejšnjih trikotnikov, krogov, snežinke in dreves: npr. ko je razdalja neke črte < 1px.]
+
+--
+
+Ustavitveni pogoj najraje definiramo čimprej v funkciji, da ga ne pozabimo.
+Najbolje na začetku funkcije, **vsekakor pa vedno pred rekurzivnim klicem**!
+
+.small[(Sicer dobimo `RuntimeError: maximum recursion depth exceeded`...)]
+
+???
+  Ker gremo drugače vedno spet v rekurzivni klic, namesto da bi rekurzijo zapustili.
+---
+## Ustavitveni pogoj ...
+Fibonaccijevo zaporedje:
+.center[0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, ...]<br>
+
+```python
+def fib(N):
+    # ??? kaj manjka tukaj ???
+    return fib(N-1) + fib(N-2)
+```
+???
+* Kaj manjka v kodi?
+  * Katera **ključna beseda** je povezavana s 'pogojem'? (`if`)
+  * Kdaj je **problem dovolj majhen**?
+---
+## Ustavitveni pogoj ...
+Fibonaccijevo zaporedje:
+.center[0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, ...]<br>
+
+```python
+def fib(N):
+    if N <= 1:      # izhodni pogoj
+        return N    #   ne ponovimo rekurzivnega klica
+    else:
+        return fib(N-1) + fib(N-2)
+```
+
+--
+Kaj se zgodi?
+
+--
+```python
+>>> def fib(N):
+...     return N if N <= 1 else fib(N-1) + fib(N-2)
+... 
+>>> fib(5)
+5
+>>> [fib(i) for i in range(12)]
+[0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
+```
+---
+## Zakaj rekurzija
+* Veliko problemov lahko rešimo rekurzivno (risanje dreves,
+  sortiranje elementov seznama, parsanje HTML značk; katerikoli problem,
+  ki ga lahko razgradimo na enake podprobleme).
+* Lepša koda.
+
+Vsako kodo z rekurzijo lahko prepišemo v iterativno kodo
+(tj. z [_iteracijami_](https://sl.wikipedia.org/wiki/Iteracija), brez rekurzije).
+
+.col2[
+  Rekurzivna koda:
+```python
+def fib(N):
+    if N <= 1:
+        return N
+    else:
+        return fib(N-1) + fib(N-2)
+```
+]
+.col2[
+  Iterativna koda:
+```python
+def fib_iter(N):
+    a, b = 0, 1  # prvi dve števili zaporedja
+    while N > 0:
+        N, a, b = N-1, b, a+b
+    return a
+```
+]
+???
+* Zakaj je desna koda iterativna? Kje je rekurzija v desni kodi? V levi?
+* Katera koda vam je bolj všeč?
+* Katera koda je boljša?
+  * Nerekurzivna koda je (v tem primeru) **hitrejša** in zasede
+    **manj pomnilnika**. Ne pa vedno!
+--
+
+#.center[Vprašanja?]
+</textarea>
+<script src="../remark.min.js"></script>
+<script src="../remark-script.js"></script>
+</body>
+</html>
