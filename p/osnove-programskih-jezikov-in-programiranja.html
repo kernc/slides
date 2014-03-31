@@ -270,7 +270,7 @@ Za .u[_lepe_ funkcije] je značilno, da so:
 
 * **kratke** (telo dolgo največ 15 vrstic, raje 5 vrstic ali manj),
 * smiselno poimenovane,
-* deterministične, tj. da pri klicu z
+* čiste, deterministične, tj. da pri klicu z
   **enakimi vhodnimi argumenti** vračajo vedno **enako izhodno vrednost**.
 
 Zlato pravilo programiranja:
@@ -326,9 +326,9 @@ JavaScript pa vse za `//` ali znotraj `/* ... */`.
 Primer slabega komentiranja:
 ```javascript
 function fib(n) {  // funkcija fib
-  if (n <= 1)      // če je n manjši ali enak 1
-    return n;      // vrnemo n
-  return fib(n-1) + fib(n-2);  // sicer vrnemo fib(n-1) + fib(n-2)
+    if (n <= 1)      // če je n manjši ali enak 1
+        return n;      // vrnemo n
+    return fib(n-1) + fib(n-2);  // sicer vrnemo fib(n-1) + fib(n-2)
 }
 ```
 Primer dobrega komentiranja:
@@ -339,7 +339,7 @@ def fib(n):
        izračunano s pomočjo rekurzije: http://sl.wikipedia.org/wiki/Rekurzija
     """
     if n <= 1:
-      return n
+        return n
     return fib(n-1) + fib(n-2)  # vsota prejšnjih dveh Fibonaccijevih števil
 ```
 ???
