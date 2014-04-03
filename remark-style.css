@@ -1,6 +1,7 @@
 @import url(http://fonts.googleapis.com/css?family=Parisienne&subset=latin-ext);
 
-html,body,textarea#source {width:99%; height:97%;}
+html,body,textarea#source {width:99%; height:97%; margin:0; padding:0; border:0;}
+h1, h2, h3, h4, h5, h6 {position:relative; z-index:3;}
 body {font-size:20px; line-height:170%; font-family:DejaVu Sans, sans-serif;}
 noscript {color:red;}
 h1 {line-height:120%;}
@@ -17,8 +18,17 @@ code {background:#eee; border:1px solid silver; font-size:14px; padding:1px 4px;
 pre > code {border:0px;}
 pre,
 pre > code {font-size:12px; line-height:110%; margin:0px; border-radius:10px;}
-.col2 {width:45%; margin:0 2% 2% 0; padding:1%; float:left; border:1px solid silver; border-radius:5px;}
-.col3 {width:30%; margin:0 1% 2% 0; padding:1%; float:left; border:1px solid silver; border-radius:5px;}
-.col2:last-child, .col3:last-child {margin-right:0%;}
+.col2,
+.col2b {width:45%; margin:0 2% 2% 0; padding:1%; float:left;}
+.col3,
+.col3b {width:30%; margin:0 1% 2% 0; padding:1%; float:left;}
+.col2:last-child,
+.col3:last-child {margin-right:0%;}
+.col2b,
+.col3b {border:1px solid silver; border-radius:5px;}
 .clear {display:block; clear:both;}
 .condensed {line-height:110%;}
+
+.wh100 > * {width:100%; height:100%; position:absolute; top:0; left:0;}
+.w100 > * {width:100%; position:absolute; left:0;}
+.h100 > * {height:100%; position:absolute; top:0;}
