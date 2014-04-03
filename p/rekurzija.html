@@ -2,8 +2,8 @@
 <html lang="sl">
 <head>
 <meta charset="utf-8" />
-<meta content="OPIS PREDSTAVITVE" name="description" />
-<title>NASLOV PREDSTAVITVE</title>
+<meta content="O računalniški rekurziji, povezavi s fraktali, Python primer izračuna Fibonaccijevih števil rekurzivno in iterativno, zakaj rekurzija, ..." name="description" />
+<title>Rekurzija</title>
 <link href="../remark-style.css" rel="stylesheet" type="text/css">
 <style>
 </style>
@@ -13,17 +13,17 @@
 <textarea id="source">
 class: center, middle
 # Rekurzija
-Da bi razumeli rekurzijo, morate najprej razumeti rekurzijo.
+Če hočete razumeti rekurzijo, morate najprej razumeti rekurzijo.
 ---
 ## Rekurzija v slikah
-.center[![primer rekurzije](../resources/rekurzija/frame1.png)]
+.wh100[![primer rekurzije](../resources/rekurzija/frame1.png)]
 ---
 .col2[.center[![primer rekurzije](../resources/rekurzija/frame2.png)]]
 .col2[.center[![primer rekurzije](../resources/rekurzija/frame3.png)]]
 ---
-.center[![primer rekurzije](../resources/rekurzija/desktop1.png)]
+.wh100[![primer rekurzije](../resources/rekurzija/desktop1.png)]
 ---
-.center[![primer rekurzije](../resources/rekurzija/desktop2.png)]
+.wh100[![primer rekurzije](../resources/rekurzija/desktop2.png)]
 ---
 ## Definicija
 <iframe width="100%" height="300" src="//bos.zrc-sazu.si/cgi/a03.exe?name=sskj_testa&amp;expression=rekurz&amp;hs=1" frameborder="0"></iframe>
@@ -40,6 +40,9 @@ Rekurzija je **postopek**, ki je definiran (določen, **opisan**) **sam s sabo**
 ---
 ## Sierpinski trikotnik ...
 .center[<img alt="konstrukcija trikotnika Sierpinskega" src="../resources/rekurzija/sierpinski2.png" style="width:50%"/>]
+
+???
+  Kot da bi imeli funkcijo `narisi_bel_trikotnik(mere_crnega_trikotnika)`.
 ---
 ## Cantorjevi krogi
 .center[<img alt="Cantorjevi krogi" src="../resources/rekurzija/cantor.png" style="width:70%"/>]
@@ -56,7 +59,7 @@ Oblika drevesa odvisna od začetnih parametrov sistema (kotov trikotnika).
 ![Pitagorovo drevo](../resources/rekurzija/pythagoras-tree2.png)
 ---
 ## Pitagorovo drevo ...
-![Pitagorovo drevo](../resources/rekurzija/pythagoras-tree3.png)
+.center[![Pitagorovo drevo](../resources/rekurzija/pythagoras-tree3.png)]
 ---
 ## Pitagorovo drevo ...
 .center[<iframe width="600" height="400" src="//www.youtube.com/embed/jEmSxcr-rRc?rel=0" frameborder="0" allowfullscreen></iframe>]
@@ -64,12 +67,27 @@ Oblika drevesa odvisna od začetnih parametrov sistema (kotov trikotnika).
 ## Pitagorovo drevo ...
 .center[![Pitagorovo drevo](../resources/rekurzija/pythagoras-tree4.png)]
 ---
-.center[![3D drevo v igri](https://upload.wikimedia.org/wikipedia/commons/b/b1/Fractal_tree_%28Plate_b_-_3%29.jpg)]
+.wh100[![3D drevo v igri](https://upload.wikimedia.org/wikipedia/commons/b/b1/Fractal_tree_%28Plate_b_-_3%29.jpg)]
+---
+## Fraktali v naravi...
+<img alt="Fraktali v naravi: porečje, strela, romanesco brokoli, praprot, aloe vera, ledene rože, drevesni list" src="../resources/rekurzija/fraktali-v-naravi.png" style="width:100%;height:100%;left:0;top:0;position:absolute;">
 ---
 ## Fibonaccijevo zaporedje
-Recimo, da imamo zaporedje števil
-.center[0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, ...]
-kjer je **vsako naslednje** število **vsota prejšnjih dveh**.
+Recimo, da imamo zaporedje števil,
+<br>
+kjer je **vsako naslednje** število **vsota prejšnjih dveh**:
+
+.u[**0**, **1**], 1, 2, 3, 5, 8, 
+--
+13, 
+--
+21, 
+--
+34, 
+--
+55, 
+--
+89, ...
 
 --
 
@@ -167,7 +185,7 @@ Kaj se zgodi?
 ---
 ## Zakaj rekurzija
 * Veliko problemov lahko rešimo rekurzivno (risanje dreves,
-  sortiranje elementov seznama, parsanje HTML značk; katerikoli problem,
+  sortiranje/iskanje elementov seznama, parsanje HTML značk; katerikoli problem,
   ki ga lahko razgradimo na enake podprobleme).
 * Lepša koda.
 
