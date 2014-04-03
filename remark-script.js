@@ -2,7 +2,7 @@ var remark_config = {highlightStyle: 'default'};
 var slideshow = remark.create(remark_config);
 
 var _gaq = _gaq || [];
-if (window.location.hostname != 'localhost') {
+if (window.location.hostname.substring('coderdojo.si') != -1) {
     _gaq.push(['_setAccount', 'UA-39132001-4']);
     _gaq.push(['_trackPageview']);
     (function() {
