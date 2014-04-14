@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="utf-8" />
+<meta content="O standardni hierarhiji datotečnega sistema na Unix (Linux) sistemih in zakaj je ta boljša kot na Windows sistemih." name="description" />
+<title>FHS - (Unix) Hierarhija datotečnega sistema</title>
+<link href="../remark-style.css" rel="stylesheet" type="text/css">
+<style>
+</style>
+</head>
+<body>
+<noscript>Če <b>omogočite JavaScript</b>, ta stran postane poučna prezentacija.</noscript>
+<textarea id="source">
+class: center, middle
+# FHS - Filesystem hierarchy standard
+## Hierarhija datotečnega sistema
+---
+## Datoteke in direktoriji
+.center[![Raziskovalec z datotekami](../resources/fhs-hierarhija-datotecnega-sistema/winexplorer.png)]
+
+Datoteke vsebujejo podatke.
+
+Direktoriji (mape) vsebujejo datoteke in direktorije.
+---
+## Zgradba diska
+.center[![Vrtljivi disk s sektorji](../resources/fhs-hierarhija-datotecnega-sistema/hdd.png)]
+Disk si lahko abstraktno predstavljamo kot niz oštevilčenih sektorjev, pri čemer:
+* 1 sektor = 512 B (bytov)
+* 1 byte = 8 bit (bitov)
+* 1 bit = "prostorček" z vrednostjo ali 0 ali 1
+---
+## Datotečni sistem
+Datotečni sistem (angl. _filesystem_) je nek protokol (dogovor),
+kako zaporedje ničel in enk na disku predstavlja datoteke in direktorije.
+
+Nariši FAT (angl. _file allocation table_).
+
+Podpora za datotečne sistema:
+* Windows: NTFS, FAT, UDF.
+* Linux: ext*, XFS, JFS, ReiserFS, btrfs, ZFS, NTFS, FAT, UDF, 
+  [...](https://www.kernel.org/doc/Documentation/filesystems/)
+---
+.center[![NTFS vs ext4 performance](../resources/fhs-hierarhija-datotecnega-sistema/fs-performance.png)]
+---
+## Hierarhija datotečnega sistema — .u[Windows]
+* koren datotečnega sistema: `C:\`
+* vse datoteke programa na enem mestu:
+  `C:\Program Files\Mozilla Firefox\`
+  (razen nastavitev v registru, `C:\Windows\System32\Config\*`)
+* uporabniške nastavitve programa:
+  `C:\Users\janez\Application Data\Mozilla\Firefox\`
+* uporabniški dokumenti: `C:\Users\janez\My Documents\`
+* ...
+---
+# Hierarhija datotečnega sistema — .u[Unix/Linux]
+* koren datotečnega sistema: `/`
+* vsi programi so distribuirani kot **paketi** (angl. _packages_)
+* vse datoteke programa *niso* na enem mestu:
+  * zagonske datoteke v `/bin` ali `/usr/bin` (_**bin**aries_)
+  * konfiguracija v `/etc`
+  * knjižnice (kar so v Windowsih DLL daoteke) v `/usr/lib`
+  * ostale datoteke programa (navodila, priročniki, ikone, ...) v `/usr/share`
+* uporabniške nastavitve programa: `/home/janez/.mozilla`
+* uporabniški dokumenti: `/home/janez`
+* naprave v `/dev`
+* dnevniki programov v `/var/log`
+---
+## Absolutne in relativne poti
+TODO
+---
+# Pravice
+Uporabnik ima pravice za pisanje samo v svoj domači direktorij `/home/janez`
+(po konvenciji včasih okrajšan v `~`).
+Če želi pisati drugam po disku, si mora zagotoviti ustrezne pravice, npr. s `sudo` ukazom.
+```bash
+janez@masina: ~ $ pwd      # print working directory
+/home/janez
+janez@masina: ~ $ mkdir a  # make directory 'a'
+janez@masina: ~ $ cd a     # change directory to 'a'
+janez@masina: ~/a $ pwd
+/home/janez/a
+janez@masina: ~/a $ touch b  # dotakni se datoteke 'b'
+janez@masina: ~/a $ ls
+b
+janez@masina: ~/a $ touch /var/d  # dotakni se datoteke /var/d
+touch: cannot touch `/var/d': Permission denied
+janez@masina: ~/a $ sudo touch /var/d
+janez@masina: ~/a $ ls /var/d
+/var/d
+```
+---
+## Skrite datoteke
+TODO
+</textarea>
+<script src="../remark.min.js"></script>
+<script src="../remark-script.js"></script>
+</body>
+</html>
