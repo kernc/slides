@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="utf-8" />
+<meta content="Osnove spletnega programiranja in spletne arhitekture, ki jo mora razumeti vsak spletni razvijalec." name="description" />
+<title>Kako nastane spletna stran</title>
+<link href="../remark-style.css" rel="stylesheet" type="text/css">
+<style>
+	img, svg {width: 100%}
+	.col3-img {text-align: center; font-weight: bolder; width:30%; margin:0 1% 2% 0; padding:1%; float:left;}
+	.col2-img {text-align: center; font-weight: bolder; width:45%; margin:0 1% 2% 0; padding:1%; float:left;}
+	.col3-img img, .col2-img img {width: 90%; display: block; margin: 2px auto 2px auto;}
+	.centerimg { margin: 10px; text-align: center; }
+	.bigimg { margin: 0 10px 5px 10px; text-align: center; }
+	.bigimg img { display: block; margin: 0px auto; width: 85%; }
+	.centerimg img { width: 50%; }
+</style>
+</head>
+<body>
+<noscript>Če <b>omogočite JavaScript</b>, ta stran postane poučna prezentacija.</noscript>
+<textarea id="source">
+class: center, middle
+# Kako nastane spletna stran
+---
+## Arhitektura
+
+**Kaj potrebujemo?**
+
+- **strežnik** - najamemo delček strežnika (lahko dobimo brezplačno) ali pa ga sami postavimo (Rasberry PI)
+- **kabel** - najamemo preko Telekoma, T2, Amisa, ... (lahko gremo v knjižnico)
+- **brskalnik** - včasih se ga je kupilo, zdaj ga snamemo iz interneta brezplačno
+
+.col3-img[
+Strežnik
+![](../resources/kako-nastane-spletna-stran/server.jpg)
+
+]
+.col3-img[
+Kabel
+![](../resources/kako-nastane-spletna-stran/kabel.jpg)
+
+]
+.col3-img[
+Brskalnik
+![](../resources/kako-nastane-spletna-stran/brskalnik.jpg)
+
+]
+---
+## Shema
+![](../resources/kako-nastane-spletna-stran/shema-spleta.svg)
+---
+## Pizzeria
+![](../resources/kako-nastane-spletna-stran/pizzeria.png)
+---
+## Pizzeria iz stališča razvijalca
+![](../resources/kako-nastane-spletna-stran/pizzeria-razvijalec.png)
+---
+## Pizzeria iz stališča uporabnika
+![](../resources/kako-nastane-spletna-stran/pizzeria-uporabnik.png)
+---
+## Zgodba
+.col2[
+Kaj se zgodi v pizzeriji?
+
+- gost pove svoje želje natakarici: hrana in pijača
+- predno natakarica *odnese* sporočilo, ga še opremi z dodatnimi podatki, npr. številka mize, velikost porcije, ...
+- **kuhar** prejme naročilo in prične pripravljati zahtevano jed po **receptu**
+- kuhar pripravljeno **izroči** natakarici, ki **dostavi** vse potrebno na mizo
+]
+
+.col2[
+Kaj pa na spletu?
+
+- v brskalnik **vtipkamo** ali pa **kliknemo** na URL naslov
+- brskalnik **zahtevek** opremi z dodatnimi podatki
+- zahtevek preko ogromno kanalov prileti do **strežnika**
+- ta ga obdela na podlagi **algoritma** v navodilo za brskalnik
+- strežnik vrne navodilo po kanalu do brskalnika
+- brskalnik **izriše** spletno stran uporabniku
+]
+---
+# Naročilo
+
+Kako izgleda naročilo?
+
+- "Želim bolognese pizzo z nacho sirom."
+  - "http://www.picarija.si/pizza/bolognese?dodatki=nacho"
+- "Gospa natakarica, želim vegetarjansko pizzo brez olive in nacho sirom."
+  - "http://natakarica@www.picarija.si/pizza/vege?brez=oliva&dodatki=nacho"
+- "Želim navadno pizzo, vendar varno zapakirano v škatlici, da jo odnesem domov."
+  - "https://www.picarija.si/pizza/navadna"
+- "Halo halo, Anon pri telefonu, naročil bi dunajski zrezek na naslov ..."
+  - "https://www.picarija.si:071123456/kosilo/dunajski" (najdaljša telefonska števila je sicer lahko le **65535**)
+- "Naročila bi veliko kmečko pizzo, vendar na dva krožnika."
+  - "http://www.picarija.si/pizza/kmecka?velikost=velika#kroznik=2"
+
+Resnica o URL naslovu
+```
+protokol://uporabnik:geslo@streznik:vrata/pot/do/programa?parameter1=Pozdravljen&...
+```
+---
+# Naročilo kot URL
+
+- protokol: **http**, *https*, ftp, ssh, ...
+- vrata: **80**, 443, 8080
+- uporabnik, geslo: privzeto brez
+- strežnik: IP številka ali domena
+
+## Kako od domene do IP številke
+V resnici ima vedno neko številko (IP naslov), ampak za lažje brskanje lahko pišemo imena (domene),
+ki so shranjene v nekem imeniku (DNS strežnik). Ko vtipkamo `http://www.zemanta.com` se najprej povpraša *korenski* imenik, kdo je `com`, nato kdo je `zemanta` in na koncu kdo je `www`. V odgovor dobimo neko številko, npr. `77.94.136.208`, ki je kot naslov, npr. *Celovška cesta 32*.
+
+---
+Zahtevek (naročilo bolj uradno)
+```
+GET / HTTP/1.1
+Host: course.coderdojo.si
+Connection: keep-alive
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko)
+Chrome/33.0.1750.149 Safari/537.36
+Accept-Encoding: gzip,deflate,sdch
+Accept-Language: en-US,en;q=0.8,sl;q=0.6,en-GB;q=0.4
+Cookie: _ga=GA1.2.326423702.1393943140; __utma=238833810.326423702.1393943140.1394526334.1395071780.4;
+__utmb=238833810.1.10.1395071780; __utmc=238833810;
+__utmz=238833810.1393943140.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)
+```
+Odgovor strežnika:
+```
+HTTP/1.1 200 OK
+Server: GitHub.com
+Content-Type: text/html; charset=utf-8
+Last-Modified: Tue, 04 Mar 2014 14:30:57 GMT
+Expires: Mon, 17 Mar 2014 16:15:49 GMT
+Cache-Control: max-age=600
+Content-Encoding: gzip
+Content-Length: 1277
+Accept-Ranges: bytes
+Date: Mon, 17 Mar 2014 16:05:49 GMT
+Via: 1.1 varnish
+Age: 0
+Connection: keep-alive
+X-Served-By: cache-fra1222-FRA
+X-Cache: MISS
+X-Cache-Hits: 0
+X-Timer: S1395072349.647996664,VS0,VE98
+Vary: Accept-Encoding
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+```
+...
+---
+# Kabel
+
+Kabel je vedno. Tudi če imamo wireless, bodo v nekem trenutku podatki potovali
+po nekih kablih.
+
+- kabel do ponudnika spletnih storitev (optika, kabelska, telefonska žica)
+- kabel od ponudnika do končnega strežnika (ta pa lahko gre tudi čez oceane)
+
+Kaj pa potuje po kablu? **Paketki**!
+
+Računalnik zapakira vsebino v paketke, ti potujejo do strežnika, ta jih razpakira in združi
+po dogovorjenih navodilih nazaj v neko vsebino. Strežnik pripravi odgovor in ga zapakira v množico paketkov, ki spet potujejo do računalnika, se razpakirajo in pošljejo brskalniku.
+
+Zapleteno? Ja. Moramo poznati podrobnosti? Zagotovo ni slabo, saj tako lahko preprečimo kakšne probleme še predno nastanejo.  
+---
+
+# Zgradba spletne strani - miza
+.col2[
+Efekti!!
+```javascript
+$.vsak(krozniki, naredi (i, kroznik) {
+  prizgiSvecoPodKroznikom(kroznik);
+});
+```
+]
+.col2[
+Dizajn mize
+```css
+miza { oblika: krog; }
+kroznik { velikost: 25; }
+kroznik[velikost="velika"] { velikost: 30; }
+prt { barva: bela; }
+prt.okrogli { oblika: krog; }
+```
+]
+.clear[
+Vsebina mize
+```xml
+<miza>
+	<glava>
+		<stevilka>10</stevilka>
+		<natakar>Jozica</natakar>
+	</glava>
+	<vsebina>
+		<prt razred="okrogli">
+			<kroznik velikost="velika">Bolognese pizza</kroznik>
+			<kroznik>Navadna pizza</kroznik>
+			<vaza>
+				<roza>Vrtnica</roza>
+				<roza>Vrtnica</roza>
+			</vaza>
+			<kozarec>Voda</kozarec>
+			<kozarec>Sok</kozarec>
+		</prt>
+	</vsebina>
+</miza>
+```
+]
+
+---
+
+# Statična spletna stran
+Dostopna [tukaj](../resources/kako-nastane-spletna-stran/primer.html). Kdo to poganja? Vedno brskalnik!
+.col2[
+Interaktivnost kot JavaScript
+```javascript
+$('p').hide();
+setTimeout(function () {
+	$('h1').animate({
+		'font-size': '100px'
+	}, function () {
+		$('p').each(function () {
+			$(this).slideDown('slow');
+		});
+	});
+}, 500);
+```
+]
+.col2[
+Dizajn kot CSS
+```css
+div.razdelek {
+	width: 500px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+h1 {
+	text-decoration: underline;
+	font-size: 5px;
+}
+p { font-size: 50px; text-align: left; }
+```
+]
+.clear[
+Vsebina kot HTML
+```html
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+	<meta charset="utf-8" />
+	<title>Spletna stran</title>
+	<link href="slog.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<div class="razdelek">
+		<h1>Naslov</h1>
+		<p>Prvi odstavek ...</p> <p>Drugi odstavek</p>
+	</div>
+	<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+	<script src="skripta.js"></script>
+</body>
+</html>
+```
+]
+
+---
+# Dinamična spletna stran!
+
+Kaj je dinamična spletna stran? Dinamično spletno stran strežnik na podlagi algoritma opremi z spreminjajočo vsebino. Kaj potrebujemo? **Strežnik, strežniško aplikacijo in bazo podatkov**.
+
+.bigimg[ ![](../resources/kako-nastane-spletna-stran/24ur.png) ]
+
+---
+# Kuhinja
+.col2[
+Kuhar mora biti sposoben sprejeti naročilo, ga obdelati na podlagi recepta in vrniti v obliki, da ga bo natakarica lahko odnesla k mizi.
+
+Velika večina strežnikov gosti na Linux operacijskem sistemu. Za zahtevke poslušajo na zato določenih vratih (80, 443) in "servirajo" nazaj spletne strani. Uporabnik dobi *statično* spletno stran, ki pa je zgrajena **dinamično**.
+]
+.col2[
+![](../resources/kako-nastane-spletna-stran/pork.jpg)
+![](../resources/kako-nastane-spletna-stran/fish.jpg)
+]
+---
+# Recept
+
+pizza/napolitana
+```php
+<?php
+$testo = zmesiTesto();
+poravnaj($testo);
+$sestavine = pripraviSestavine({
+	 "pelati", "mozarella", "origano",
+}, explode(',', $_GET['dodatno']), explode(',', $_GET['brez']));
+	 
+$pizza = naloziSestavine($testo, $sestavine);
+	 
+dajVKrusnoPec($pizza);
+$kroznik = postaviNaKroznik($pizza);
+oddajNatakarju($kroznik);
+?>	 
+```
+
+.col2[
+.bigimg[
+ ![](../resources/kako-nastane-spletna-stran/napolitana.jpg)
+]
+]
+.col2[
+A vemo kakšne so stestavine?
+
+Vidimo samo rezultat, vse ostalo je za končnega uporabnika skrivnost!
+
+Lahko pa ugibamo - **hekanje**.
+]
+
+---
+# V katerem jeziku pišemo recepte?
+
+Ogromno možnosti:
+
+- PHP ("surov", Symphony, Codeigniter, Zend)
+- Python (Django, web2py, Flask)
+- Ruby (Ruby on Rails)
+- *Javascript (Node.JS)*
+- Java (Java EE)
+- C# (.NET)
+- Perl
+- Go
+- ...
+
+Vhodne podatke dobimo iz URL-ja in zahtevka (GET in POST parametri). Izhod je najpogosteje HTML,
+lahko pa tudi JSON, slika, XML itd.
+
+---
+# Hladilnik, skladišče, blagajna ...
+
+Kje pa najdemo vse sestavine? Kam spravimo denar naročnika? Kam si zapišemo naslov za dostavo?
+
+.col2[
+## Baze podatkov
+
+Podatke shranimo v za to namenjeno aplikacijo in jih kasneje tudi prevzemamo. Možnosti:
+
+- mySQL
+- Sqlite
+- Redis
+- MongoDB
+- Cassandra
+- ...
+]
+.col2[
+![](../resources/kako-nastane-spletna-stran/fridge.jpg)
+]
+---
+# Kaj torej pomeni "narediti spletno aplikacijo"?
+
+Najprej odgovoriti na kopico vprašanj:
+
+- Na kakšen strežnik jo bom postavil?
+- Kam bom spravil podatke?
+- V katerem jeziku jo bom pisal?
+- Bo interaktivna?
+- Kako bom poskrbel za varnost?
+- Bom delal stran od začetka ali bom uporabil že kakšno dodelano orodje?
+
+Na začetku je težko najti vse odgovore, nato postanemo utečeni.
+
+---
+## Kakšne probleme ima pri razvoju spletni programer?
+Ogromno:
+
+- podpora spletnim brskalnikom (IE6, IE7, IE...)
+- identiteta uporabnika (kako si ga zapomniti, kako si prepoznati, kako **VARNO** spraviti njegove osebne podatke?
+- hitrost in učinkovitost (minimizacija, vektorska grafika)
+- dostopnost storitve (kam dati spletno stran, da bo vedno na voljo?)
+
+Kako jih rešiti?
+
+---
+.col2-img[
+![](../resources/kako-nastane-spletna-stran/wp.png)
+]
+.col2-img[
+![](../resources/kako-nastane-spletna-stran/heroku.png)
+]
+.col2-img[
+![](../resources/kako-nastane-spletna-stran/django.png)
+]
+.clear[]
+.col2-img[
+![](../resources/kako-nastane-spletna-stran/rails.png)
+]
+.col2-img[
+![](../resources/kako-nastane-spletna-stran/appengine.png)
+]
+
+</textarea>
+<script src="http://gnab.github.com/remark/downloads/remark-0.6.0.min.js"></script>
+<script src="../remark-script.js"></script>
+</body>
+</html>
